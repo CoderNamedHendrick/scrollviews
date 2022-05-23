@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import 'next_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -173,20 +175,54 @@ class _MyHomePageState extends State<MyHomePage>
             snap: true,
             floating: true,
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return Container(
-                  height: 100,
-                  color: Colors.pink,
-                  margin: const EdgeInsets.symmetric(vertical: 7),
-                );
-              },
-              childCount: 20,
+          SliverToBoxAdapter(
+            child: Center(
+              child: MaterialButton(
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const NextScreen(),
+                  ),
+                ),
+                color: Colors.pink,
+                child: const Text('Press'),
+              ),
             ),
-          )
+          ),
+          // SliverList(
+          //   delegate: SliverChildBuilderDelegate(
+          //     (context, index) {
+          //       return Container(
+          //         height: 100,
+          //         color: Colors.pink,
+          //         margin: const EdgeInsets.symmetric(vertical: 7),
+          //       );
+          //     },
+          //     childCount: 20,
+          //   ),
+          // )
         ],
       ),
     );
+  }
+}
+
+class SearchBarDelegate extends SliverPersistentHeaderDelegate {
+  final double expandedHeight;
+  SearchBarDelegate({required this.expandedHeight});
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(color: Colors.green, height: expandedHeight);
+  }
+
+  @override
+  double get maxExtent => expandedHeight;
+
+  @override
+  double get minExtent => expandedHeight;
+
+  @override
+  bool shouldRebuild(covariant SearchBarDelegate oldDelegate) {
+    return oldDelegate != this;
   }
 }
