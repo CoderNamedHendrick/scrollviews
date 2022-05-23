@@ -36,6 +36,7 @@ class _NextScreenState extends State<NextScreen> {
         floatHeaderSlivers: true,
         headerSliverBuilder: (context, value) => [
           const SliverAppBar(
+            backgroundColor: Colors.orange,
             title: Text('Available Routes'),
           ),
           SliverPersistentHeader(
@@ -65,7 +66,7 @@ class SearchBarDelegate extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
-      color: Colors.blue,
+      color: Colors.purple,
       height: expandedHeight,
       alignment: Alignment.bottomCenter,
       // The search bar
